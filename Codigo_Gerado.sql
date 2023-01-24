@@ -28,7 +28,7 @@ CREATE TABLE Atua (
     Nome_do_personagem VARCHAR
 );
 
-CREATE TABLE Fitas Alugadas (
+CREATE TABLE Fitas_Alugadas (
     fk_Fita_Codigo INTEGER,
     fk_Aluguel_Codigo INTEGER
 );
@@ -73,12 +73,12 @@ ALTER TABLE Aluguel ADD CONSTRAINT FK_Aluguel_2
     REFERENCES Cliente (Codigo)
     ON DELETE RESTRICT;
  
-ALTER TABLE Fitas Alugadas ADD CONSTRAINT FK_Fitas Alugadas_1
+ALTER TABLE Fitas_Alugadas ADD CONSTRAINT FK_Fitas_Alugadas_1
     FOREIGN KEY (fk_Fita_Codigo)
     REFERENCES Fita (Codigo)
     ON DELETE RESTRICT;
  
-ALTER TABLE Fitas Alugadas ADD CONSTRAINT FK_Fitas Alugadas_2
+ALTER TABLE Fitas_Alugadas ADD CONSTRAINT FK_Fitas_Alugadas_2
     FOREIGN KEY (fk_Aluguel_Codigo)
     REFERENCES Aluguel (Codigo)
     ON DELETE SET NULL;
