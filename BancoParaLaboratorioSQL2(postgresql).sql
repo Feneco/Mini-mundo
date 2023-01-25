@@ -1,3 +1,12 @@
+-- Utilização de mais de um SGBD
+-- 1) Execute o script no MYSQL
+-- 			R: Não funcionou
+-- 2) Execute o script no POSTGRESQL
+-- 			R: Não funcionou
+-- 3) Faça as correções necessárias
+-- 			R: O código abaixo está concertado para postgresql
+--             A correção para MYSQL está em outro arquivo.
+
 DROP TABLE IF EXISTS FILME_ATOR;
 DROP TABLE IF EXISTS ATOR;
 DROP TABLE IF EXISTS LOC_FITA;
@@ -14,7 +23,6 @@ CREATE TABLE  CLIENTE
 	 fone		INTEGER);
 
 
-
 CREATE TABLE LOCACAO
 	(codLoc		SERIAL PRIMARY KEY,
 	 codCli 	INTEGER,
@@ -28,7 +36,6 @@ CREATE TABLE LOCACAO
 CREATE TABLE  CATEGORIA
 	(codCat		SERIAL PRIMARY KEY,
 	 descricao	varchar(30) NOT NULL);
-
 
 
 CREATE TABLE FILME
@@ -49,7 +56,6 @@ CREATE TABLE FITA
 		REFERENCES   FILME(codFilme));
 
 
-
 CREATE TABLE LOC_FITA
 	(codFita INTEGER,
 	 codLoc  INTEGER,
@@ -60,7 +66,6 @@ CREATE TABLE LOC_FITA
 	 	FOREIGN KEY (codLoc)
 		REFERENCES LOCACAO(codLoc),
 	 PRIMARY KEY (codFita, codLoc));
-
 
 
 CREATE TABLE ATOR
@@ -140,3 +145,73 @@ insert into LOC_FITA(codLoc, codFita) values(2, 2);
 insert into LOC_FITA(codLoc, codFita) values(3, 3);
 insert into LOC_FITA(codLoc, codFita) values(4, 4);
 insert into LOC_FITA(codLoc, codFita) values(5, 5);
+
+
+
+-- ###############################################
+-- Consulta do banco de dados:
+-- 1:
+SELECT * FROM ATOR;
+
+-- 2:
+SELECT 
+	FILME.titulo, CATEGORIA.descricao 
+FROM
+	FILME, CATEGORIA
+WHERE FILME.codCat = CATEGORIA.codCat;
+
+-- 3:
+SELECT
+	FILME.titulo as titulo, ATOR.nreal as nome_ator
+FROM FILME_ATOR
+	JOIN 
+		FILME
+	ON FILME.codFilme = FILME_ATOR.codFilme
+	JOIN
+		ATOR
+	ON ATOR.codator = FILME_ATOR.codator;
+
+-- 4:
+-- Está tudo pronto na query de cima
+
+-- 5:
+SELECT FILME.titulo as titulo, ATOR.nreal as nome_ator
+FROM FILME_ATOR
+JOIN FILME ON FILME.codFilme = FILME_ATOR.codFilme
+JOIN ATOR  ON ATOR.codator  = FILME_ATOR.codator
+WHERE FILME_ATOR.codFilme = (SELECT FILME_ATOR.codFilme 
+						     from FILME_ATOR 
+						     WHERE FILME_ATOR.codator = (SELECT ATOR.codAtor 
+						                                 FROM ATOR 
+						                             	 WHERE ATOR.nreal = 'Gloria Pires')) 
+ORDER BY ATOR.nreal; -- provavelmente tem uma forma melhor do que ter que fazer isso
+
+-- 6:
+SELECT ATOR.nreal AS atores_com_a
+FROM ATOR
+WHERE ATOR.nreal LIKE 'A%';
+
+-- 7:
+SELECT COUNT(CLIENTE.codcli)
+FROM CLIENTE;
+
+-- 8:
+SELECT distinct CLIENTE.nome
+from LOCACAO
+join CLIENTE on LOCACAO.codcli = CLIENTE.codcli;
+	
+-- 9:
+SELECT CLIENTE.nome, count(LOCACAO.codloc)
+from LOCACAO
+join CLIENTE on LOCACAO.codcli = CLIENTE.codcli
+group by CLIENTE.nome;
+
+-- 10:
+select qtd_aluguel_cliente.nome_cliente 
+from ( 
+	SELECT CLIENTE.nome as nome_cliente, count(l.codloc) as qtd
+ 	from LOCACAO l 
+	join CLIENTE on l.codcli = CLIENTE.codcli
+    group by CLIENTE.codcli
+) qtd_aluguel_cliente
+where qtd_aluguel_cliente.qtd > 1;
