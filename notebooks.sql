@@ -1,54 +1,54 @@
 CREATE TABLE tb_estado (
-	id_estado int NOT NULL PRIMARY KEY,
+	id_estado serial PRIMARY KEY,
 	estado varchar(45)
 );
 
 
 CREATE TABLE td_categoria (
-	id_categoria int NOT NULL PRIMARY KEY,
+	id_categoria serial PRIMARY KEY,
 	categoria varchar(200)
 );
 
 
 CREATE TABLE td_sexo (
-	id_sexo int NOT NULL PRIMARY KEY,
+	id_sexo serial PRIMARY KEY,
 	sexo varchar(20)
 );
 
 
 CREATE TABLE td_tipo_email (
-	id_tipo_email int NOT NULL PRIMARY KEY,
+	id_tipo_email serial PRIMARY KEY,
 	tipo_email varchar(45)
 );
 
 
 CREATE TABLE td_tipo_endereco (
-	id_tipo_endereco int NOT NULL PRIMARY KEY,
+	id_tipo_endereco serial PRIMARY KEY,
 	tipo_endereco varchar(100)
 );
 
 
 CREATE TABLE td_tipo_telefone (
-	id_tipo_telefone int NOT NULL PRIMARY KEY,
+	id_tipo_telefone serial PRIMARY KEY,
 	tipo_telefone varchar(45)
 );
 
 
 CREATE TABLE td_tipo_usuario (
-	id_tipo_usuario int NOT NULL PRIMARY KEY,
+	id_tipo_usuario serial PRIMARY KEY,
 	tipo_usuario varchar(45)
 );
 
 
 CREATE TABLE tb_cidade (
-	id_cidade int NOT NULL PRIMARY KEY,
+	id_cidade serial PRIMARY KEY,
 	cidade varchar(45),
 	tb_estado_id_estado int
 );
 
 
 CREATE TABLE tb_dados (
-	id_dados int NOT NULL PRIMARY KEY,
+	id_dados serial PRIMARY KEY,
 	nome varchar(255),
 	cpf_cnpj varchar(20),
 	td_sexo_id_sexo int
@@ -56,7 +56,7 @@ CREATE TABLE tb_dados (
 
 
 CREATE TABLE tb_email (
-	id_email int NOT NULL PRIMARY KEY,
+	id_email serial PRIMARY KEY,
 	email varchar(255),
 	tb_dados_id_dados int,
 	td_tipo_email_id_tipo_email int
@@ -64,7 +64,7 @@ CREATE TABLE tb_email (
 
 
 CREATE TABLE tb_item (
-	id_item int NOT NULL PRIMARY KEY,
+	id_item serial PRIMARY KEY,
 	item varchar(100),
 	descricao varchar(255),
 	ativo smallint,
@@ -75,7 +75,7 @@ CREATE TABLE tb_item (
 
 
 CREATE TABLE tb_telefone (
-	id_telefone int NOT NULL PRIMARY KEY,
+	id_telefone serial PRIMARY KEY,
 	telefone varchar(25),
 	tb_dados_id_dados int,
 	td_tipo_telefone_id_tipo_telefone int
@@ -83,7 +83,7 @@ CREATE TABLE tb_telefone (
 
 
 CREATE TABLE tb_usuario (
-	id_usuario int NOT NULL PRIMARY KEY,
+	id_usuario serial PRIMARY KEY,
 	login varchar(100),
 	senha varchar(255),
 	ativo smallint,
@@ -107,14 +107,14 @@ CREATE TABLE ta_recebe (
 
 
 CREATE TABLE tb_bairro (
-	id_bairro int NOT NULL PRIMARY KEY,
+	id_bairro serial PRIMARY KEY,
 	bairro varchar(45),
 	tb_cidade_id_cidade int
 );
 
 
 CREATE TABLE tb_endereco (
-	id_endereco int NOT NULL PRIMARY KEY,
+	id_endereco serial PRIMARY KEY,
 	cep varchar(15),
 	numero varchar(100),
 	complemento varchar(255),
