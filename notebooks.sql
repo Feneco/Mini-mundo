@@ -1,49 +1,57 @@
 CREATE TABLE tb_estado (
 	id_estado serial PRIMARY KEY,
-	estado varchar(45)
+	estado varchar(45),
+	CONSTRAINT tb_estado_un UNIQUE (estado)
 );
 
 
 CREATE TABLE td_categoria (
 	id_categoria serial PRIMARY KEY,
-	categoria varchar(200)
+	categoria varchar(200),
+	CONSTRAINT td_categoria_un UNIQUE (categoria)
 );
 
 
 CREATE TABLE td_sexo (
 	id_sexo serial PRIMARY KEY,
-	sexo varchar(20)
+	sexo varchar(20),
+	CONSTRAINT td_sexo_un UNIQUE (sexo)
 );
 
 
 CREATE TABLE td_tipo_email (
 	id_tipo_email serial PRIMARY KEY,
-	tipo_email varchar(45)
+	tipo_email varchar(45),
+	CONSTRAINT td_tipo_email_un UNIQUE (td_tipo_email)
 );
 
 
 CREATE TABLE td_tipo_endereco (
 	id_tipo_endereco serial PRIMARY KEY,
-	tipo_endereco varchar(100)
+	tipo_endereco varchar(100),
+	CONSTRAINT td_tipo_endereco_un UNIQUE (tipo_endereco)
 );
 
 
 CREATE TABLE td_tipo_telefone (
 	id_tipo_telefone serial PRIMARY KEY,
-	tipo_telefone varchar(45)
+	tipo_telefone varchar(45),
+	CONSTRAINT td_tipo_telefone_un UNIQUE (tipo_telefone)
 );
 
 
 CREATE TABLE td_tipo_usuario (
 	id_tipo_usuario serial PRIMARY KEY,
-	tipo_usuario varchar(45)
+	tipo_usuario varchar(45),
+	CONSTRAINT td_tipo_usuario_un UNIQUE (tipo_usuario)
 );
 
 
 CREATE TABLE tb_cidade (
 	id_cidade serial PRIMARY KEY,
 	cidade varchar(45),
-	tb_estado_id_estado int
+	tb_estado_id_estado int,
+	CONSTRAINT tb_cidade_un UNIQUE (cidade)
 );
 
 
@@ -51,7 +59,8 @@ CREATE TABLE tb_dados (
 	id_dados serial PRIMARY KEY,
 	nome varchar(255),
 	cpf_cnpj varchar(20),
-	td_sexo_id_sexo int
+	td_sexo_id_sexo int,
+	CONSTRAINT tb_dados_un UNIQUE (cpf_cnpj)
 );
 
 
@@ -59,7 +68,8 @@ CREATE TABLE tb_email (
 	id_email serial PRIMARY KEY,
 	email varchar(255),
 	tb_dados_id_dados int,
-	td_tipo_email_id_tipo_email int
+	td_tipo_email_id_tipo_email int,
+	CONSTRAINT tb_email_un UNIQUE (email)
 );
 
 
@@ -88,7 +98,8 @@ CREATE TABLE tb_usuario (
 	senha varchar(255),
 	ativo smallint,
 	td_tipo_usuario_id_tipo_usuario int,
-	tb_dados_id_dados int
+	tb_dados_id_dados int,
+	CONSTRAINT tb_usuario_un UNIQUE (login)
 );
 
 
@@ -109,7 +120,8 @@ CREATE TABLE ta_recebe (
 CREATE TABLE tb_bairro (
 	id_bairro serial PRIMARY KEY,
 	bairro varchar(45),
-	tb_cidade_id_cidade int
+	tb_cidade_id_cidade int,
+	CONSTRAINT tb_bairro_un UNIQUE (bairro)
 );
 
 
