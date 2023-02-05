@@ -21,3 +21,11 @@ create view endereco_usuario as (
 	left join tb_cidade   c        on c.id_cidade                = b.tb_cidade_id_cidade
 	left join tb_estado   e        on e.id_estado                = c.tb_estado_id_estado
 );
+
+create view usuarios_que_doaram as (
+    select u.id_usuario, d.nome, i.item, i.descricao, td.qtd_saida as qtd
+    from tb_usuario u
+    left join tb_dados d on d.id_dados = u.tb_dados_id_dados
+    inner join ta_doacao td on td.tb_usuario_id_usuario = u.id_usuario
+    left join tb_item i on td.tb_item_id_item = i.id_item
+);
