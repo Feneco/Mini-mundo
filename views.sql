@@ -29,3 +29,11 @@ create view usuarios_que_doaram as (
     inner join ta_doacao td on td.tb_usuario_id_usuario = u.id_usuario
     left join tb_item i on td.tb_item_id_item = i.id_item
 );
+
+create view usuarios_que_receberam as (
+    select u.id_usuario, d.nome, i.id_item, i.item, i.descricao, tr.qtd_entrada as qtd
+    from tb_usuario u
+    left join tb_dados d on d.id_dados = u.tb_dados_id_dados
+    inner join ta_recebe tr on tr.tb_usuario_id_usuario = u.id_usuario
+    left join tb_item i on tr.tb_item_id_item = i.id_item
+);
