@@ -23,7 +23,7 @@ create view endereco_usuario as (
 );
 
 create view usuarios_que_doaram as (
-    select u.id_usuario, d.nome, i.item, i.descricao, td.qtd_saida as qtd
+    select u.id_usuario, d.nome, i.id_item, i.item, i.descricao, td.qtd_saida as qtd
     from tb_usuario u
     left join tb_dados d on d.id_dados = u.tb_dados_id_dados
     inner join ta_doacao td on td.tb_usuario_id_usuario = u.id_usuario
