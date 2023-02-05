@@ -12,7 +12,7 @@ left join  tb_email     on tb_email.tb_dados_id_dados    = dados.id_dados
 where tb_usuario.id_usuario = codigo_usuario;
 
 
--- Sado um codigo_usuário o select acima retorna todos os IDs necessários para fazer os delete abaixo. 
+-- Dado um codigo_usuário o select acima retorna todos os IDs necessários para fazer os delete abaixo. 
 delete from ta_moradia
 where tb_dados_id_dados = id_dados_to_delete and tb_endereco_id_endereco = id_endereco_to_delete;
 
