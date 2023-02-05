@@ -1,49 +1,49 @@
 -- estado é unico. Pode dar problema
 INSERT INTO tb_estado (
-	estado ) 
+    estado )
 VALUES (
-	estado_usuario );
+    estado_usuario );
 
 
 INSERT INTO tb_cidade (
-	cidade, 	
-	tb_estado_id_estado ) 
+    cidade,
+    tb_estado_id_estado )
 VALUES (
-	cidade_usuario,
-	(SELECT id_estado FROM tb_estado 
-	 WHERE estado=estado_usuario));
+    cidade_usuario,
+    (SELECT id_estado FROM tb_estado
+     WHERE estado=estado_usuario));
 
 
 INSERT INTO tb_bairro (
-	bairro,
-	tb_cidade_id_cidade )
+    bairro,
+    tb_cidade_id_cidade )
 VALUES (
-	bairro_usuario,
-	(SELECT id_cidade FROM tb_cidade
-	 WHERE cidade=cidade_usuario));
+    bairro_usuario,
+    (SELECT id_cidade FROM tb_cidade
+     WHERE cidade=cidade_usuario));
 
 
 -- tipo_endereco é unico. Pode dar problema
 INSERT INTO td_tipo_endereco (
-	tipo_endereco)
+    tipo_endereco)
 VALUES (
-	tipo_endereco_usuario);
+    tipo_endereco_usuario);
 
 
 INSERT INTO tb_endereco (
-	cep,
-	numero,
-	complemento,
-	td_tipo_endereco_id_tipo_endereco,
-	tb_bairro_id_bairro)
+    cep,
+    numero,
+    complemento,
+    td_tipo_endereco_id_tipo_endereco,
+    tb_bairro_id_bairro)
 VALUES (
-	cep_endereco_usuario,
-	numero_endereco_usuario,
-	complemento_endereco_usuario,
-	(SELECT id_tipo_endereco FROM td_tipo_endereco
-	 WHERE tipo_endereco=tipo_endereco_usuario),
-	(SELECT id_bairro FROM tb_bairro
-	 WHERE bairro=bairro_usuario));
+    cep_endereco_usuario,
+    numero_endereco_usuario,
+    complemento_endereco_usuario,
+    (SELECT id_tipo_endereco FROM td_tipo_endereco
+     WHERE tipo_endereco=tipo_endereco_usuario),
+    (SELECT id_bairro FROM tb_bairro
+     WHERE bairro=bairro_usuario));
 
 
 -- sexo é unico. Pode dar problema
@@ -76,7 +76,7 @@ VALUES (
 
 -- tipo_email é unico. Pode dar problema
 INSERT INTO td_tipo_email (
-	tipo_email )
+    tipo_email )
 VALUES (
     tipo_email_usuario);
 
