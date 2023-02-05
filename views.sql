@@ -15,7 +15,7 @@ create view endereco_usuario as (
 	from tb_dados dados
     left join tb_usuario  u        on u.tb_dados_id_dados        = dados.id_dados
 	left join tb_telefone t        on dados.id_dados             = t.tb_dados_id_dados
-	left join ta_moradia  tm       on tm.tb_dados_id_dados       = dados.id_dados
+	inner join ta_moradia  tm       on tm.tb_dados_id_dados       = dados.id_dados
 	left join tb_endereco endereco on tm.tb_endereco_id_endereco = endereco.id_endereco
 	left join tb_bairro   b        on b.id_bairro                = endereco.tb_bairro_id_bairro
 	left join tb_cidade   c        on c.id_cidade                = b.tb_cidade_id_cidade
